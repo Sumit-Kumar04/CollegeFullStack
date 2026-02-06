@@ -1,0 +1,13 @@
+{
+  "name": "day3",
+  "version": "1.0.0",
+  "main": "files.js",
+  "type":"module",
+  "scripts": {
+    "start": "files.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
