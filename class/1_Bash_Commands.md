@@ -23,7 +23,7 @@ shell is gui
 kernel techal with hardware
 
 
-Root folder
+Root folder ~
 home folder-->users 
 etc folder-->configuration
 temp folder-->cache files
@@ -100,10 +100,9 @@ u g o a
   -ri           -->recursively 
   -n            -->line number 
   file2.txt:1:third file content
- -I ---> prevent binary files from search    excluded images pdfs  .csv also ignore 
+ -I ---> prevent binary files from search    egrep -E "word1|word2" filename.txtxcluded images pdfs  .csv also ignore 
 
  \\Search for multiple words (logical OR)
-    grep -E "word1|word2" filename.txt
      grep -Er "(car|bike)"  test/
 
 FIND
