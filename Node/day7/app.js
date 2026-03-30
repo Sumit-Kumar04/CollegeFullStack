@@ -21,6 +21,6 @@
 //Patah PArams-->marketplace=FLIPKART   &q=watch+rolex  &store=r18%2Ff13&   srno=s_1_3&     otracker=search         &otracker1=search       &fm=Search      &iid=9154fa18-794b-463d-bddb-b67a5cff894d
 
 
-//queryParams
+//queryParams---> KEY VALUE PAIRES SEPATRATED BY =
 
 
