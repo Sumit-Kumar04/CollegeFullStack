@@ -3,14 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title></title>
+    
 </head>
 <body>
-    <div>
-        <h2>Hi i am navbar</h2>
-        <p>Hero sectiom</p>
-        <h5>I am footer</h5>
+    <H1><%=name%></H1>        <!--//return values-->
+    <!-- <H1/H1>  //Import html pages -->
+    <div class="container">
+        <div class="navbar">
+            Hi I am Navbar
+        </div>
+
+        <div class="hero">
+            <p>Hero Section</p>
+        </div>
+
+        <div class="footer">
+            I am Footer
+        </div>
+
+        <h2>Object data</h2>
+        <%obj.forEach(s=>{%>
+            <li>
+                <%=s.name%>
+                <%=s.section%>
+            </li>
+        <%})%>
     </div>
-    
 </body>
 </html>
+
+<!-- 
+} -->
