@@ -1,0 +1,561 @@
+# MongoDB Notes - Day 1 (Basics + Find Commands)
+
+## 1) Show all databases
+
+```js id="g7q3s2"
+show dbs
+```
+
+### Purpose:
+
+Displays all existing databases in MongoDB.
+
+### Important:
+
+* Only databases with data usually appear.
+* Empty DB may not show until something is inserted.
+
+---
+
+## 2) Switch / Create a database
+
+```js id="uxp7qk"
+use testfullStack
+```
+
+### Purpose:
+
+* Switches to database `testfullStack`
+* If database does not exist, MongoDB prepares it
+* Actual database is created only after inserting data
+
+### Output:
+
+```js id="ah4c1y"
+switched to db testfullStack
+```
+
+---
+
+## 3) Insert one document into a collection
+
+```js id="t9d2re"
+db.users.insertOne({ name: "Shazam" })
+```
+
+### Purpose:
+
+* Inserts one document into `users` collection
+* If collection does not exist, MongoDB creates it automatically
+
+### Output:
+
+```js id="h8z1pq"
+{
+  acknowledged: true,
+  insertedId: ObjectId("69ccb590fb306761a9748a5f")
+}
+```
+
+---
+
+## 4) Show collections in current database
+
+```js id="m2r8xv"
+show collections
+```
+
+### Example Output:
+
+```js id="d1f9bn"
+users
+```
+
+---
+
+# FIND COMMANDS (Very Important)
+
+## 5) Find all documents
+
+```js id="x4k7wt"
+db.users.find()
+```
+
+### Purpose:
+
+Returns all documents from `users` collection.
+
+### Example Output:
+
+```js id="c7m1yu"
+[
+  {
+    _id: ObjectId("69ccb590fb306761a9748a5f"),
+    name: "Shazam"
+  }
+]
+```
+
+---
+
+## 6) Find first matching document
+
+```js id="k6v2je"
+db.users.findOne()
+```
+
+### Purpose:
+
+Returns only the first document from the collection.
+
+### Example:
+
+```js id="n5p8zr"
+db.users.findOne()
+```
+
+### Output:
+
+```js id="q2t4lw"
+{
+  _id: ObjectId("69ccb590fb306761a9748a5f"),
+  name: "Shazam"
+}
+```
+
+---
+
+## 7) Find with condition / filter
+
+```js id="b9w3cx"
+db.users.find({ name: "Shazam" })
+```
+
+### Purpose:
+
+Returns all documents where `name` is `"Shazam"`.
+
+### Example:
+
+```js id="e3u6ri"
+db.users.find({ name: "Shazam" })
+```
+
+---
+
+## 8) Find one with condition
+
+```js id="z1n7qf"
+db.users.findOne({ name: "Shazam" })
+```
+
+### Purpose:
+
+Returns first matching document where `name` is `"Shazam"`.
+
+---
+
+## 9) Pretty format output
+
+```js id="v4c8mx"
+db.users.find().pretty()
+```
+
+### Purpose:
+
+Shows documents in readable formatted style.
+
+### Example Output:
+
+```js id="r8p2jh"
+{
+  _id: ObjectId("69ccb590fb306761a9748a5f"),
+  name: "Shazam"
+}
+```
+
+---
+
+## 10) Find selected fields only (Projection)
+
+```js id="f6d1ky"
+db.users.find({}, { name: 1 })
+```
+
+### Purpose:
+
+Shows only the `name` field (and `_id` by default).
+
+### Example Output:
+
+```js id="p9s4vb"
+[
+  {
+    _id: ObjectId("69ccb590fb306761a9748a5f"),
+    name: "Shazam"
+  }
+]
+```
+
+---
+
+## 11) Hide `_id` field in output
+
+```js id="j2x5mq"
+db.users.find({}, { _id: 0, name: 1 })
+```
+
+### Purpose:
+
+Shows only `name` and hides `_id`.
+
+### Example Output:
+
+```js id="w7n3zu"
+[
+  {
+    name: "Shazam"
+  }
+]
+```
+
+---
+
+## 12) Find with multiple conditions
+
+```js id="u3r9ke"
+db.users.find({ name: "Shazam", age: 20 })
+```
+
+### Purpose:
+
+Returns documents matching both conditions.
+
+---
+
+## 13) Count matching documents
+
+```js id="l8q4hy"
+db.users.find({ name: "Shazam" }).count()
+```
+
+### Purpose:
+
+Counts how many documents match the condition.
+
+### Better modern way:
+
+```js id="o5t1cn"
+db.users.countDocuments({ name: "Shazam" })
+```
+
+---
+
+## 14) Limit number of results
+
+```js id="s7v2pd"
+db.users.find().limit(2)
+```
+
+### Purpose:
+
+Returns only first 2 documents.
+
+---
+
+## 15) Skip documents
+
+```js id="y6m8qx"
+db.users.find().skip(1)
+```
+
+### Purpose:
+
+Skips first document and returns remaining documents.
+
+---
+
+## 16) Sort documents
+
+### Ascending order
+
+```js id="c1k7ra"
+db.users.find().sort({ name: 1 })
+```
+
+### Descending order
+
+```js id="d4p9we"
+db.users.find().sort({ name: -1 })
+```
+
+### Purpose:
+
+* `1` = ascending
+* `-1` = descending
+
+---
+
+# Wrong Commands You Tried
+
+## 17) Wrong: users.findAll()
+
+```js id="g2u6mj"
+users.findAll()
+```
+
+### Error:
+
+```js id="m9c3tv"
+ReferenceError: users is not defined
+```
+
+### Correct:
+
+```js id="q7b1xn"
+db.users.find()
+```
+
+---
+
+## 18) Wrong: db.users.findAll()
+
+```js id="h5r8pk"
+db.users.findAll()
+```
+
+### Error:
+
+```js id="t2w4js"
+TypeError: db.users.findAll is not a function
+```
+
+### Correct:
+
+```js id="k1e9zu"
+db.users.find()
+```
+
+---
+
+# Drop Database Command
+
+## 19) Wrong: db.dropdatabase()
+
+```js id="n4v7ly"
+db.dropdatabase()
+```
+
+### Error:
+
+```js id="r1m5qx"
+TypeError: db.dropdatabase is not a function
+```
+
+### Correct:
+
+```js id="x8p2jd"
+db.dropDatabase()
+```
+
+---
+
+## 20) Delete current database
+
+```js id="b3t6wc"
+db.dropDatabase()
+```
+
+### Output:
+
+```js id="e9k1zr"
+{ ok: 1, dropped: "testfullStack" }
+```
+
+---
+
+# MongoDB Hierarchy
+
+```txt id="w2c8na"
+Database -> Collection -> Document
+```
+
+### Example:
+
+```txt id="p6x4hf"
+testfullStack -> users -> { name: "Shazam" }
+```
+
+---
+
+# Important Concepts
+
+## A) Database is created only after insertion
+
+```js id="s5n9qv"
+use myDB
+```
+
+This may not appear in:
+
+```js id="j7r3mt"
+show dbs
+```
+
+To actually create it:
+
+```js id="v1k8ze"
+db.users.insertOne({ name: "Sumit" })
+```
+
+---
+
+## B) Collection is auto-created
+
+```js id="f4d2py"
+db.users.insertOne({ name: "Shazam" })
+```
+
+If `users` collection does not exist, MongoDB creates it automatically.
+
+---
+
+## C) `_id` field is automatic
+
+```js id="u9m6cx"
+db.users.find()
+```
+
+Every document gets a unique `_id` automatically.
+
+---
+
+# Day 1 Command Summary
+
+```js id="a2q7vw"
+show dbs
+
+use testfullStack
+
+db.users.insertOne({ name: "Shazam" })
+
+show collections
+
+db.users.find()
+
+db.users.findOne()
+
+db.users.find({ name: "Shazam" })
+
+db.users.find().pretty()
+
+db.users.find({}, { _id: 0, name: 1 })
+
+db.users.find().sort({ name: 1 })
+
+db.users.find().limit(2)
+
+db.users.countDocuments({ name: "Shazam" })
+
+db.dropDatabase()
+```
+
+---
+
+# Interview Quick Notes
+
+## Q1) Does `use myDB` create DB immediately?
+
+```txt id="m3x8rn"
+No.
+It only switches to that DB name.
+The DB is actually created when data is inserted.
+```
+
+---
+
+## Q2) Do we need to create collection manually first?
+
+```txt id="d8v1qt"
+No.
+MongoDB automatically creates the collection when first document is inserted.
+```
+
+---
+
+## Q3) Is MongoDB case-sensitive in method names?
+
+```txt id="n6k4pw"
+Yes.
+Example:
+dropDatabase()  -> correct
+dropdatabase()  -> wrong
+```
+
+---
+
+## Q4) Difference between `find()` and `findOne()`?
+
+```txt id="r5j2ly"
+find()    -> returns multiple documents
+findOne() -> returns only first matching document
+```
+
+---
+
+# Day 1 Practice Commands
+
+```js id="z9c7mx"
+show dbs
+
+use collegeDB
+
+db.students.insertOne({ name: "Sumit", age: 20, city: "Agra" })
+
+db.students.insertOne({ name: "Aman", age: 22, city: "Delhi" })
+
+db.students.insertOne({ name: "Shazam", age: 21, city: "Mumbai" })
+
+show collections
+
+db.students.find()
+
+db.students.findOne()
+
+db.students.find({ name: "Sumit" })
+
+db.students.find({}, { _id: 0, name: 1, age: 1 })
+
+db.students.find().sort({ age: 1 })
+
+db.students.find().limit(2)
+
+db.students.countDocuments({ city: "Delhi" })
+
+db.dropDatabase()
+```
+
+---
+
+# 1-Minute Revision Flow
+
+```txt id="y1r6kb"
+show dbs
+-> use dbName
+-> insertOne()
+-> show collections
+-> find()
+-> findOne()
+-> filter find()
+-> sort()
+-> limit()
+-> dropDatabase()
+```
+
+---
+
+# Title for Notebook
+
+```txt id="c4p8ws"
+MongoDB Day 1 - Basics + Find Commands
+```
