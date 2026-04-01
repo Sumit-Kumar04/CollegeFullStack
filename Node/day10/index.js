@@ -48,3 +48,6 @@ app.listen(3000,()=>{
 //Client side rendering-->in the browser all renderinghappens
 //server side rendering--> in the server  
 //ejs(embedded java script)
+//Status codes
+//401-->
+//403
