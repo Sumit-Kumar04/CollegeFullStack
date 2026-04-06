@@ -1,0 +1,68 @@
+db.users.fin({
+    $or:[{isActive:true},{isActive:false}]
+})
+
+db.users.updateMany(
+    {},
+    {
+        $set:{
+            marks:[
+                {subject:"Maths",Score:80},
+                {subject:"CSE",Score:70},
+                {subject:"NODE",Score:70},
+            ]
+        }
+    }
+)
+
+db.users.updateMany(
+    {},
+    {
+        $set:{
+            marks:[
+                {subject:"Maths",Score:80},
+                {subject:"CSE",Score:70},
+                {subject:"NODE",Score:70},
+            ]
+        }
+    }
+)
+
+//$push
+ db.users.updateMany(
+  {},
+  {
+    $push: {
+      marks: { subject: "VQR", marks: 88 }
+    }
+  }
+)
+
+ //$pull
+ db.users.updateMany(
+  {},
+  {
+    $pull: {
+      marks: { subject: "VQR", marks: 88 }
+    }
+  }
+)
+
+//update iinly Score
+db.users.updateMany(
+  {},
+  {
+    $pull: {
+      marks: { subject: "VQR", marks: 88 }
+    }
+  }
+)
+
+db.users.updateMany(
+  { "marks.subject": "VQR" },
+  {
+    $set: {
+      "marks.Score": 95
+    }
+  }
+)
